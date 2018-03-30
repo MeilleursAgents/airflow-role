@@ -48,7 +48,7 @@
 
 - name: Airflow | Set AIRFLOW_HOME environment variable in /etc/environment
   lineinfile:
-    path: /etc/environment
+    destfile: /etc/environment
     line: 'AIRFLOW_HOME={{ airflow_home }}'
 
 - name: Airflow | Installing Airflow
