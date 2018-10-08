@@ -75,13 +75,21 @@ airflow_plugins_folder: "{{ airflow_home }}/plugins"
 # REMOTE LOGS
 airflow_remote_base_log_folder:
 airflow_remote_log_conn_id:
+airflow_remote_logging: False
 airflow_encrypt_s3_logs: False
 airflow_s3_log_folder: # DEPRECATED
+
+airflow_hostname_callable: socket:getfqdn
+airflow_default_timezone: utc
 
 # DB
 airflow_database_conn: sqlite:////etc/airflow/airflow.db
 airflow_database_pool_size: 5
 airflow_database_pool_recycle: 2000
+airflow_sql_alchemy_pool_enabled: True
+airflow_sql_alchemy_reconnect_timeout: 300
+
+airflow_dag_run_conf_overrides_params: False
 
 # CLI
 airflow_cli_api_client: airflow.api.client.local_client
@@ -90,11 +98,26 @@ airflow_cli_api_endpoint_url: http://localhost:8080
 # API
 airflow_auth_backend: airflow.api.auth.backend.default
 
+# LINEAGE
+airflow_lineage_backend:
+
+# ATLAS
+airflow_atlas_sasl_enabled: False
+airflow_atlas_host:
+airflow_atlas_port: 21000
+airflow_atlas_username:
+airflow_atlas_password:
+
+# HIVE
+# Default mapreduce queue for HiveOperator tasks
+airflow_hive_default_hive_mapred_queue:
+
 # WEBSERVER
 airflow_webserver_base_url: http://localhost:8080
 airflow_webserver_host: 0.0.0.0
 airflow_webserver_port: 8080
 airflow_webserver_workers: 4
+airflow_webserver_master_timeout: 120
 airflow_webserver_worker_timeout: 120
 airflow_webserver_ssl_cert:
 airflow_webserver_ssl_key:
@@ -139,6 +162,13 @@ airflow_ldap_basedn:
 airflow_ldap_cacert:
 airflow_ldap_search_scope:
 
+# FAB
+airflow_rbac: False
+
+# UI
+airflow_navbar_color: #007A87
+airflow_default_dag_run_display_number: 25
+
 # MAIL
 airflow_email_backend: airflow.utils.email.send_email_smtp
 
@@ -150,6 +180,12 @@ airflow_smtp_port: 25
 airflow_smtp_mail_from: airflow@airflow.com
 airflow_smtp_user:
 airflow_smtp_passwd:
+
+# DASK
+airflow_dask_cluster_address: 127.0.0.1:8786
+airflow_dask_tls_ca:
+airflow_dask_tls_cert:
+airflow_dask_tls_key:
 
 # SCHEDULER
 airflow_scheduler_job_heartbeat_sec: 5
@@ -219,3 +255,31 @@ airflow_admin_connections: []
 # list of items following the structure provided in the example comment
 dags_dependencies:
   # - {name: pip_package, version: version_needed}
+
+# ELASTICSEARCH
+airflow_elasticsearch_host:
+airflow_elasticsearch_log_id_template: '{dag_id}-{task_id}-{execution_date}-{try_number}'
+airflow_elasticsearch_end_of_log_mark: end_of_log
+
+# KUBERNETES
+airflow_kubernetes_worker_container_repository:
+airflow_kubernetes_worker_container_tag:
+airflow_kubernetes_delete_worker_pods: True
+airflow_kubernetes_namespace: default
+airflow_kubernetes_airflow_configmap:
+airflow_kubernetes_dags_volume_subpath:
+airflow_kubernetes_dags_volume_claim:
+airflow_kubernetes_logs_volume_subpath:
+airflow_kubernetes_logs_volume_claim:
+airflow_kubernetes_git_repo:
+airflow_kubernetes_git_branch:
+airflow_kubernetes_git_user:
+airflow_kubernetes_git_password:
+airflow_kubernetes_git_subpath:
+airflow_kubernetes_git_sync_container_repository: gcr.io/google-containers/git-sync-amd64
+airflow_kubernetes_git_sync_container_tag: v2.0.5
+airflow_kubernetes_git_sync_init_container_name: git-sync-clone
+airflow_kubernetes_worker_service_account_name:
+airflow_kubernetes_image_pull_secrets:
+airflow_kubernetes_gcp_service_account_keys:
+airflow_kubernetes_in_cluster: True
