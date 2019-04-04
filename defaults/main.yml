@@ -251,8 +251,8 @@ airflow_admin_connections: []
   #   conn_uri: postgres://user:passwordh@host:port/dbname
 airflow_admin_pools: []
  # - pool_name:
- # - pool_slots
- # - pool_description
+ #   pool_slots
+ #   pool_description
 
 ## DAGs
 # Python dependencies needed by the DAGs. This variable is expected to be a
