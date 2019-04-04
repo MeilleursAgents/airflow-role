@@ -102,3 +102,11 @@
   become: true
   become_user: "{{ airflow_user }}"
   with_items: "{{ airflow_admin_connections }}"
+
+- name: Airflow | Add pools from configuration file
+  command: "{{ airflow_executable }} pool -s {{ item.pool_name }} {{ item.pool_slots }} '{{ item.pool_description }}'"
+  environment:
+    AIRFLOW_HOME: "{{ airflow_home }}"
+  become: true
+  become_user: "{{ airflow_user }}"
+  with_items: "{{ airflow_admin_pools }}"
