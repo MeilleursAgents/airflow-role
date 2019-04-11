@@ -267,7 +267,7 @@ celery_app_name = {{ airflow_celery_app_name }}
 # "airflow worker" command. This defines the number of task instances that
 # a worker will take, so size up your workers based on the resources on
 # your worker box and the nature of your tasks
-celeryd_concurrency = {{ airflow_celery_concurrency }}
+worker_concurrency = {{ airflow_celery_concurrency }}
 
 # When you start an airflow worker, airflow starts a tiny web server
 # subprocess to serve the workers local log files to the airflow main
@@ -282,7 +282,7 @@ worker_log_server_port = {{ airflow_celery_worker_log_server_port }}
 broker_url = {{ airflow_celery_broker_url }}
 
 # Another key Celery setting
-celery_result_backend = {{ airflow_celery_result_backend }}
+result_backend = {{ airflow_celery_result_backend }}
 
 # Celery Flower is a sweet UI for Celery. Airflow has a shortcut to start
 # it `airflow flower`. This defines the IP that Celery Flower runs on
