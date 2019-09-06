@@ -12,7 +12,9 @@ dags_folder = {{ airflow_dags_folder }}
 base_log_folder = {{ airflow_logs_folder }}
 
 # Log filename format
-log_filename_template = {{ '{{' }} ti.dag_id {{ '}}' }}/{{ '{{' }} ti.task_id {{ '}}' }}/{{ '{{' }} ts {{ '}}' }}-{{ '{{' }} try_number {{ '}}' }}.log
+{% raw %}
+log_filename_template = {{ti.dag_id}}/{{ti.task_id}}/{{ts}}-{{try_number}}.log
+{% endraw %}
 
 # Airflow can store logs remotely in AWS S3 or Google Cloud Storage. Users
 # must supply a remote location URL (starting with either 's3://...' or
