@@ -110,3 +110,12 @@
   become: true
   become_user: "{{ airflow_user }}"
   with_items: "{{ airflow_admin_pools }}"
+
+- name: Airflow | Cron for clean logs files
+  cron:
+    name: Clean logs file
+    minute: 0
+    hour: 10
+    user: airflow
+    job: "/usr/bin/find /var/log/airflow/ -mtime +15 -type f -delete"
+    cron_file: airflow-dags
