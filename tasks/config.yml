@@ -80,7 +80,7 @@
     - restart airflow-flower
 
 - name: Airflow | Add variables from configuration file
-  command: "{{ airflow_executable }} variables -s {{ item.key }} {{ item.value }}"
+  command: "{{ airflow_executable }} variables -s {{ item.key }} '{{ item.value }}'"
   environment:
     AIRFLOW_HOME: "{{ airflow_home }}"
   become: true
